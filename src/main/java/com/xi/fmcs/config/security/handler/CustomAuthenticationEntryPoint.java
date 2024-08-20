@@ -12,8 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
-import com.xi.fmcs.support.util.MngUtil;
-import com.xi.fmcs.support.util.WebUtil;
 import com.xi.fmcs.config.exception.model.ExceptionResponse;
 
 public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint{

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.xi.fmcs.support.util.AES256Util;
-import com.xi.fmcs.support.util.LogUtil;
 import com.xi.fmcs.config.security.model.JwtConst;
 import com.xi.fmcs.domain.admin.model.AdminMemberLoginDto;
 

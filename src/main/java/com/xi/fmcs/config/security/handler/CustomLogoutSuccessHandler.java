@@ -15,8 +15,6 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 import com.auth0.jwt.JWT;
 import com.xi.fmcs.support.model.Result;
 import com.xi.fmcs.support.util.AES256Util;
-import com.xi.fmcs.support.util.MngUtil;
-import com.xi.fmcs.support.util.WebUtil;
 import com.xi.fmcs.config.exception.model.ExceptionResponse;
 import com.xi.fmcs.config.security.model.JwtConst;
 import com.xi.fmcs.domain.login.service.LoginService;

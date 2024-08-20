@@ -92,15 +92,5 @@ public class LoginController {
 		return Result.<Object>builder()
 				.build();
     }
-    
-//	@PostMapping("/login/pwdChange")
-//	public ResultWithBag<Object> pwdChange(
-//			@RequestBody AdminMemberPwdReqDto adminMemberPwdReqDto,
-//			@Parameter(hidden = true) @AuthenticationPrincipal PrincipalDetails principalDetails
-//	) {
-//		int seq = principalDetails.getAdminMemberLoginDto().getSeq();
-//		loginService.pwdChange(seq, adminMemberPwdReqDto.getPwd(), adminMemberPwdReqDto.getNewPwd());
-//		return null; 
-//	}
 	
 }

@@ -22,8 +22,6 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.xi.fmcs.support.model.Result;
 import com.xi.fmcs.support.util.AES256Util;
-import com.xi.fmcs.support.util.MngUtil;
-import com.xi.fmcs.support.util.WebUtil;
 import com.xi.fmcs.config.exception.model.ExceptionResponse;
 import com.xi.fmcs.config.security.jwt.JwtTokenUtil;
 import com.xi.fmcs.config.security.model.JwtConst;

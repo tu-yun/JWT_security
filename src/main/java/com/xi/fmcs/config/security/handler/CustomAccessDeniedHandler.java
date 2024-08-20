@@ -12,8 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
-import com.xi.fmcs.support.util.MngUtil;
-import com.xi.fmcs.support.util.WebUtil;
 import com.xi.fmcs.config.exception.model.ExceptionResponse;
 
 public class CustomAccessDeniedHandler implements AccessDeniedHandler{

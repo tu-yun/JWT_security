@@ -23,10 +23,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.xi.fmcs.support.util.AES256Util;
-import com.xi.fmcs.support.util.MngUtil;
-import com.xi.fmcs.support.util.WebUtil;
 import com.xi.fmcs.config.exception.model.ExceptionResponse;
-import com.xi.fmcs.config.security.model.JwtConst;
 import com.xi.fmcs.config.security.model.PrincipalDetails;
 import com.xi.fmcs.domain.admin.model.AdminMemberLoginDto;
 import com.xi.fmcs.domain.login.service.LoginService;
@@ -47,11 +44,6 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 		logger.info("인가시작");
 		String accessHeader = request.getHeader(jwtConst.getAccess().getHeaderKey());
 
-		//개발완료 후 삭제
-		if(accessHeader == null) {
-			accessHeader = request.getHeader("Authorization_temp");
-		}
-		
 		//header에 accessToken이 있는지 검증 - 없으면 시큐리티 체인 리턴
 		if(accessHeader == null || !accessHeader.startsWith("Bearer ")) {
 			logger.info("어세스 토큰 헤더 없음");

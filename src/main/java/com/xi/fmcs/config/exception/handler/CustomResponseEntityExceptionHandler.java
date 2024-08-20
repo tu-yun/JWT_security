@@ -16,8 +16,6 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import com.xi.fmcs.support.util.LogUtil;
-import com.xi.fmcs.support.util.MngUtil;
 import com.xi.fmcs.config.exception.custom.CustomException;
 import com.xi.fmcs.config.exception.model.ExceptionResponse;
 

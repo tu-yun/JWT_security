@@ -8,7 +8,6 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.xi.fmcs.support.util.LogUtil;
 import com.xi.fmcs.domain.admin.model.AdminMemberLoginDto;
 
 import lombok.RequiredArgsConstructor;

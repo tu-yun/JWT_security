@@ -10,9 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.xi.fmcs.support.util.LogUtil;
-import com.xi.fmcs.support.util.MngUtil;
-import com.xi.fmcs.support.util.WebUtil;
 import com.xi.fmcs.config.exception.model.ExceptionResponse;
 
 public class WebSecurityExceptionFilter extends OncePerRequestFilter{
