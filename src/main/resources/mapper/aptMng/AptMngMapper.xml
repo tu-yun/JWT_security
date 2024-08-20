@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xi.fmcs.domain.aptMng.repository.AptMngRepository">
+
+	<!-- 슈퍼관리자 내단지관리 리스트 -->
+	<select id="XI_SP_FMCS_ADMIN_ATP_MNG_GS_L" statementType="CALLABLE"
+	 								parameterType="hashMap" resultType="AdminATPMngResponseDto">
+		{ CALL 
+			XI_SP_FMCS_ADMIN_ATP_MNG_GS_L(
+				#{@COM_SEARCH_VAL, 	mode=IN,	jdbcType=VARCHAR},
+				#{@APT_SEARCH_VAL,	mode=IN,	jdbcType=VARCHAR},
+				#{@ADDR_DO_TYPE, 	mode=IN,	jdbcType=INTEGER},
+				#{@PAGE_NUM, 		mode=IN,	jdbcType=INTEGER},
+				#{@PAGE_SIZE, 		mode=IN,	jdbcType=INTEGER},
+				#{@MYAPT_YN, 		mode=IN,	jdbcType=VARCHAR}
+			)
+		}
+	</select>
+
+	<!-- 업체관리자 내단지관리 리스트 -->
+	<select id="XI_SP_FMCS_ADMIN_ATP_MNG_L" statementType="CALLABLE"
+	 								parameterType="hashMap" resultType="AdminATPMngResponseDto">
+		{ CALL 
+			XI_SP_FMCS_ADMIN_ATP_MNG_L(
+				#{@COMPANY_SEQ, 	mode=IN,	jdbcType=INTEGER},
+				#{@APT_SEARCH_VAL,	mode=IN,	jdbcType=VARCHAR},
+				#{@ADDR_DO_TYPE, 	mode=IN,	jdbcType=INTEGER},
+				#{@PAGE_NUM, 		mode=IN,	jdbcType=INTEGER},
+				#{@PAGE_SIZE, 		mode=IN,	jdbcType=INTEGER},
+				#{@MYAPT_YN, 		mode=IN,	jdbcType=VARCHAR}
+			)
+		}
+	</select>
+
+	<!-- 내단지명 조회 -->
+	<select id="XI_SP_FMCS_ADMIN_ATP_APTNAME_SEARCH_L" statementType="CALLABLE"
+	 								parameterType="hashMap" resultType="AptNameResponseDto">
+		{ CALL 
+			XI_SP_FMCS_ADMIN_ATP_APTNAME_SEARCH_L(
+				#{@COMPANY_SEQ, 	mode=IN,	jdbcType=INTEGER},
+				#{@APT_SEARCH_VAL,	mode=IN,	jdbcType=VARCHAR}
+			)
+		}
+	</select>
+
+	<!-- 내단지 동호 리스트 상세 -->
+	<select id="XI_SP_FMCS_ADMIN_APT_INFO_L" statementType="CALLABLE"
+	 								parameterType="hashMap" resultType="AptInfoDto">
+		{ CALL 
+			XI_SP_FMCS_ADMIN_APT_INFO_L(
+				#{@APT_SEQ, 	mode=IN,	jdbcType=INTEGER},
+				#{@APT_DONG,	mode=IN,	jdbcType=VARCHAR}
+			)
+		}
+	</select>
+
+	<!-- 내단지 세대정보 삭제 -->
+	<delete id="XI_SP_FMCS_ADMIN_APT_DONG_INFO_D" statementType="CALLABLE" parameterType="hashMap">
+		{ CALL 
+			XI_SP_FMCS_ADMIN_APT_DONG_INFO_D(
+				#{@APT_SEQ,		mode=IN,	jdbcType=INTEGER},
+				#{@REG_SEQ,		mode=IN,	jdbcType=INTEGER},
+				#{@RETVAL,		mode=OUT,	jdbcType=INTEGER}
+			)
+		}
+	</delete>
+
+	<!-- 내단지 세대정보 수정 -->
+	<update id="XI_SP_FMCS_ADMIN_APT_DONG_INFO_U" statementType="CALLABLE" parameterType="hashMap">
+		{ CALL 
+			XI_SP_FMCS_ADMIN_APT_DONG_INFO_U(
+				#{@APT_SEQ,		mode=IN,	jdbcType=INTEGER},
+				#{@REG_SEQ,		mode=IN,	jdbcType=INTEGER},
+				#{@RETVAL,		mode=OUT,	jdbcType=INTEGER}
+			)
+		}
+	</update>
+
+	<!-- 해당 단지의 대표 내단지관리자 조회 -->
+	<select id="XI_SP_FMCS_ADMIN_APT_MNG_MEMBER_R" statementType="CALLABLE"
+	 								parameterType="hashMap" resultType="AdminMemberDto">
+		{ CALL 
+			XI_SP_FMCS_ADMIN_APT_MNG_MEMBER_R(
+				#{@APT_SEQ, 	mode=IN,	jdbcType=INTEGER}
+			)
+		}
+	</select>
+
+	<!-- 내단지 제공 서비스 설정 저장 -->
+	<update id="XI_SP_FMCS_ADMIN_APT_SET_U" statementType="CALLABLE" parameterType="hashMap">
+		{ CALL 
+			XI_SP_FMCS_ADMIN_APT_SET_U(
+				#{@SEQ,				mode=IN,	jdbcType=INTEGER},
+				#{@AUTH_YN,			mode=IN,	jdbcType=VARCHAR},
+				#{@OPERATION_YN,	mode=IN,	jdbcType=VARCHAR},
+				#{@FACILITY_YN,		mode=IN,	jdbcType=VARCHAR},
+				#{@CONCIERGE_YN,	mode=IN,	jdbcType=VARCHAR},
+				#{@MYAPT_YN,		mode=IN,	jdbcType=VARCHAR},
+				#{@XI_CODE,			mode=IN,	jdbcType=VARCHAR},
+				#{@REG_SEQ,			mode=IN,	jdbcType=INTEGER}
+			)
+		}
+	</update>
+
+	<!-- 내단지 제공 서비스 조회 -->
+	<select id="XI_SP_FMCS_ADMIN_APT_SET_R" statementType="CALLABLE"
+	 								parameterType="hashMap" resultType="AptServiceResponseDto">
+		{ CALL 
+			XI_SP_FMCS_ADMIN_APT_SET_R(
+				#{@SEQ, 	mode=IN,	jdbcType=INTEGER}
+			)
+		}
+	</select>
+
+	<!-- 내단지 세대 엑셀 파일 히스토리 조회 -->
+	<select id="XI_SP_R_FMCS_ADMIN_APT_INFO_EXCEL_FILES_L" statementType="CALLABLE"
+	 								parameterType="hashMap" resultType="ExcelFileInfoDto">
+		{ CALL 
+			XI_SP_R_FMCS_ADMIN_APT_INFO_EXCEL_FILES_L(
+				#{@APT_SEQ, 	mode=IN,	jdbcType=INTEGER}
+			)
+		}
+	</select>
+
+	<!-- 관리업체 변경 -->
+	<update id="XI_SP_R_FMCS_ADMIN_COMPANY_APT_U" statementType="CALLABLE" parameterType="hashMap">
+		{ CALL 
+			XI_SP_R_FMCS_ADMIN_COMPANY_APT_U(
+				#{@COMPANY_SEQ,	mode=IN,	jdbcType=INTEGER},
+				#{@APT_SEQ,		mode=IN,	jdbcType=INTEGER},
+				#{@MOD_SEQ,		mode=IN,	jdbcType=INTEGER}
+			)
+		}
+	</update>
+	
+</mapper>

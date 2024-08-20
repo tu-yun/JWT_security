@@ -1,0 +1,30 @@
+# cors
+cors:
+  origins:
+  - http://localhost:3000
+  methods:
+  - GET
+  - POST
+  - PUT
+  - PATCH
+  - DELETE
+
+# jwt
+jwt:
+  subject: xi_fmcs
+  access:
+    header-key: Authorization
+    secret-key: bZcGMJ2AlkUD43NQ
+    expire-time: 86400000	#단위 1000 = 1초
+  refresh:
+    header-key: RefreshToken
+    secret-key: UftCk4SioN8VAvYD
+    expire-time: 604800000	#단위 1000 = 1초
+
+# AES256
+aes256:
+  key: h4UMQ7rt6OlTnFASdpQJS0xuG4aY0VlB
+  iv: mIOBb9M7n5koKefD
+  
+# 개발완료 후 삭제
+accesToken-temp: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ4aV9mbWNzIiwicGtBIjoiYnRKc3cwMFM4aDFPdlMwWVRteFI1TlV3UFlXVzBlMWhCelIrVlhLWWcwRT0iLCJleHAiOjE2ODExODc2MDksImlhdCI6MTY4MTEwMTIwOX0.7T0PfLGKSgfWqMRLI9EapHN3vC6KIC_X3hhWChybyL742WR7dikQJXnbtbgyrT0f1IySNgh-mlI5QYJ37w5pQQ

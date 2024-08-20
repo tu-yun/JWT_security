@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xi.fmcs.domain.apt.repository.AptRepository">
+
+  <!-- 내단지 추가 -->
+  <insert id="XI_SP_FMCS_ADMIN_COMPANY_APT_C" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_COMPANY_APT_C(
+        #{@COMPANY_SEQ,	mode=IN,	jdbcType=INTEGER},
+        #{@XI_CODE, 	mode=IN,	jdbcType=VARCHAR},
+        #{@APT_NAME, 	mode=IN,	jdbcType=VARCHAR},
+        #{@ADDR, 		mode=IN,	jdbcType=VARCHAR},
+        #{@ADDR_DO_TYPE, 		mode=IN,	jdbcType=INTEGER},
+        #{@REG_SEQ, 		mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </insert>
+
+  <!-- 내단지 삭제 -->
+  <delete id="XI_SP_FMCS_ADMIN_APT_D" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_APT_D(
+        #{@APT_SEQ,	mode=IN,	jdbcType=INTEGER},
+        #{@REG_SEQ, 		mode=IN,	jdbcType=INTEGER},
+        #{@RETVAL, 		mode=OUT,	jdbcType=INTEGER}
+      )
+    }
+  </delete>
+
+  <!-- 업체에 등록된 단지 목록 -->
+  <select id="XI_SP_FMCS_ADMIN_COMPANY_APT_L" statementType="CALLABLE"
+          parameterType="hashMap" resultType="AdminCompanyAptResponseDto">
+    { CALL
+      XI_SP_FMCS_ADMIN_COMPANY_APT_L(
+        #{@COMPANY_SEQ,	mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </select>
+
+  <!--내 단지 정보 조회-->
+  <select id="XI_SP_FMCS_ADMIN_APT_MNG_R" statementType="CALLABLE"
+          parameterType="hashMap" resultType="AptXicodeDto">
+    { CALL
+      XI_SP_FMCS_ADMIN_APT_MNG_R(
+        #{@ADMIN_SEQ,	mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </select>
+
+  <!--내단지 상세-->
+  <select id="XI_SP_FMCS_ADMIN_APT_BY_SEQ_R" statementType="CALLABLE"
+          parameterType="hashMap" resultType="AptDetailDto">
+    { CALL
+      XI_SP_FMCS_ADMIN_APT_BY_SEQ_R(
+        #{@SEQ,	mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </select>
+
+  <!-- 단지 동정보 조회 -->
+  <select id="XI_SP_FMCS_ADMIN_ATP_DONG_L" statementType="CALLABLE"
+          parameterType="hashMap" resultType="AptDongInfoDto">
+    { CALL
+      XI_SP_FMCS_ADMIN_ATP_DONG_L(
+    #{@APT_SEQ,	mode=IN,	jdbcType=INTEGER}
+
+    )
+    }
+  </select>
+
+  <!--단지 동정보 조회-->
+  <select id="XI_SP_FMCS_ADMIN_ATP_DONG_HO_L" statementType="CALLABLE"
+          parameterType="hashMap" resultType="AptDongHoResponseDto">
+    { CALL
+      XI_SP_FMCS_ADMIN_ATP_DONG_HO_L(
+        #{@APT_SEQ,	mode=IN,	jdbcType=INTEGER},
+        #{@DONG,	mode=IN,	jdbcType=VARCHAR}
+      )
+    }
+  </select>
+
+  <!--내단지 동 호 이사 정보 등록-->
+  <insert id="XI_SP_FMCS_ADMIN_APT_MOVE_INFO_C" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_APT_MOVE_INFO_C(
+        #{@APT_INFO_SEQ,	mode=IN,	jdbcType=INTEGER},
+        #{@ELVTR_NO, 	mode=IN,	jdbcType=INTEGER},
+        #{@MOVE_TYPE, 		mode=IN,	jdbcType=INTEGER},
+        #{@REG_SEQ, 		mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </insert>
+
+  <!--내단지 동 호 이사 정보 수정-->
+  <update id="XI_SP_FMCS_ADMIN_APT_MOVE_INFO_U" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_APT_MOVE_INFO_U(
+        #{@APT_INFO_SEQ,	mode=IN,	jdbcType=INTEGER},
+        #{@ELVTR_NO, 	mode=IN,	jdbcType=INTEGER},
+        #{@MOVE_TYPE, 		mode=IN,	jdbcType=INTEGER},
+        #{@REG_SEQ, 		mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </update>
+
+  <!--APT_MOVE_INFO 존재하면 U, 없으면 C 한번에 처리-->
+  <insert id="XI_SP_R_FMCS_ADMIN_APT_MOVE_INFO_CU" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_R_FMCS_ADMIN_APT_MOVE_INFO_CU(
+        #{@APT_INFO_SEQ,	mode=IN,	jdbcType=INTEGER},
+        #{@ELVTR_NO, 	mode=IN,	jdbcType=INTEGER},
+        #{@MOVE_TYPE, 		mode=IN,	jdbcType=INTEGER},
+        #{@REG_SEQ, 		mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </insert>
+
+  <!--APT 주소 또는 MYAPT_YN 변경-->
+  <update id="XI_SP_R_FMCS_ADMIN_APT_U" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+     XI_SP_R_FMCS_ADMIN_APT_U(
+        #{@APT_SEQ,	mode=IN,	jdbcType=INTEGER},
+        #{@WORK_CD, 	mode=IN,	jdbcType=INTEGER},
+        #{@MOD_SEQ, 		mode=IN,	jdbcType=INTEGER},
+        #{@MYAPT_YN, 		mode=IN,	jdbcType=VARCHAR},
+        #{@ADDR, 		mode=IN,	jdbcType=VARCHAR},
+        #{@ADDR_DO_TYPE, 		mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </update>
+
+  <!--관리자 이메일로 중복 체크-->
+  <insert id="XI_SP_FMCS_ADMIN_APT_INFO_CHECK" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_APT_INFO_CHECK(
+        #{@APT_SEQ,	mode=IN,	jdbcType=INTEGER},
+        #{@RET_VAL, 		mode=OUT,	jdbcType=INTEGER}
+      )
+    }
+  </insert>
+
+  <!--자이코드 중복체크-->
+  <insert id="XI_SP_R_FMCS_ADMIN_APT_XI_CODE_CHECK" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_R_FMCS_ADMIN_APT_XI_CODE_CHECK(
+        #{@XI_CODE,	mode=IN,	jdbcType=VARCHAR},
+        #{@RET_VAL, 		mode=OUT,	jdbcType=INTEGER}
+      )
+    }
+  </insert>
+
+  <!--아파트 동대표 취소-->
+  <update id="XI_SP_FMCS_ADMIN_APT_DONG_REPRESENT_CANCEL_U" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_APT_DONG_REPRESENT_CANCEL_U(
+        #{@APT_SEQ,	mode=IN,	jdbcType=INTEGER},
+        #{@MEMBER_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@REG_SEQ, 		mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </update>
+
+  <!--APT_DONG_INFO 테이블 아파트 동대표 설정-->
+  <update id="XI_SP_FMCS_ADMIN_APT_DONG_REPRESENT_U" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+    XI_SP_FMCS_ADMIN_APT_DONG_REPRESENT_U(
+        #{@APT_SEQ,	mode=IN,	jdbcType=INTEGER},
+        #{@DONG,	mode=IN,	jdbcType=VARCHAR},
+        #{@MEMBER_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@REG_SEQ, 		mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </update>
+</mapper>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xi.fmcs.domain.settings.repository.AptFooterRepository">
+
+  <!--내단지 정보 조회-->
+  <select id="XI_SP_FMCS_ADMIN_FOOTER_R" statementType="CALLABLE"
+          parameterType="hashMap" resultType="AptFooterDto">
+    { CALL
+      XI_SP_FMCS_ADMIN_FOOTER_R(
+        #{@APT_SEQ, 	mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </select>
+
+  <!--내 단지 Footer 등록-->
+  <insert id="XI_SP_FMCS_ADMIN_FOOTER_C" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_FOOTER_C(
+        #{@APT_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@FOOTER_TEL_NO, 	mode=IN,	jdbcType=VARCHAR},
+        #{@FOOTER_FAX_NO, 	mode=IN,	jdbcType=VARCHAR},
+        #{@FOOTER_JIBUN, 	mode=IN,	jdbcType=VARCHAR},
+        #{@FOOTER_ROAD, 	mode=IN,	jdbcType=VARCHAR},
+        #{@FOOTER_CONTENT, 	mode=IN,	jdbcType=VARCHAR},
+        #{@FOOTER_HOURS, 	mode=IN,	jdbcType=VARCHAR},
+        #{@FOOTER_HOUSEHOLD_CNT, 	mode=IN,	jdbcType=VARCHAR},
+        #{@APT_X, 	mode=IN,	jdbcType=VARCHAR},
+        #{@APT_Y, 	mode=IN,	jdbcType=VARCHAR},
+        #{@REG_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@SEQ, 	mode=OUT,	jdbcType=INTEGER}
+      )
+    }
+  </insert>
+
+  <!--내 단지 Footer 수정-->
+  <update id="XI_SP_FMCS_ADMIN_FOOTER_U" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_FOOTER_U(
+        #{@SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@FOOTER_TEL_NO, 	mode=IN,	jdbcType=VARCHAR},
+        #{@FOOTER_FAX_NO, 	mode=IN,	jdbcType=VARCHAR},
+        #{@FOOTER_JIBUN, 	mode=IN,	jdbcType=VARCHAR},
+        #{@FOOTER_ROAD, 	mode=IN,	jdbcType=VARCHAR},
+        #{@FOOTER_CONTENT, 	mode=IN,	jdbcType=VARCHAR},
+        #{@FOOTER_HOURS, 	mode=IN,	jdbcType=VARCHAR},
+        #{@FOOTER_HOUSEHOLD_CNT, 	mode=IN,	jdbcType=VARCHAR},
+        #{@APT_X, 	mode=IN,	jdbcType=VARCHAR},
+        #{@APT_Y, 	mode=IN,	jdbcType=VARCHAR},
+        #{@APT_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@MOD_SEQ, 	mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </update>
+</mapper>

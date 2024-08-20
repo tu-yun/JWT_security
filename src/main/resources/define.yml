@@ -1,0 +1,46 @@
+# Define
+define:
+# 메일
+  SMTP: smtp.gmail.com
+  SSL: TRUE
+  MAIL: pitapat2020@gmail.com
+  PWD: vlxjvoxm2020
+
+# 파일 경로
+  UPLOAD_PATH: /Uploads/Images
+  FILE_PATH: /Files/Fmcs
+  DRM_FILE_PATH: /DrmFiles
+  EXCEL_FILE_PATH: /ExcelFiles
+  LOG_PATH: /Log
+  CMS_FILE_PATH: /Files/cms
+  
+# 앱 인터페이스 서버
+  APP_IF_URL: https://api.xi.co.kr
+  API_KEY: e079b5c8da7c98ad0b93984550aa9cbe921d34d1a3d7e25d1410d9c74f5dad83
+
+
+# profile
+spring:
+  profiles:
+    active: local	#default
+    group:
+      mac: mac
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+
+# 루트 파일 경로(Window)
+define:
+  ROOT_PATH: C:/Fmcs
+---
+spring:
+  config:
+    activate:
+      on-profile: "mac"
+      
+#루트 파일 경로(Mac)
+define:
+  ROOT_PATH: /Users/yeji/Desktop/dev
+---

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xi.fmcs.domain.community.repository.BoardBRepository">
+
+  <!--일반게시판/동게시판 목록-->
+  <select id="XI_SP_FMCS_ADMIN_BOARDB_L" statementType="CALLABLE"
+          parameterType="hashMap" resultType="BoardBListDto">
+    { CALL
+    XI_SP_FMCS_ADMIN_BOARDB_L(
+        #{@GROUP_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@SAVE_YN, 	mode=IN,	jdbcType=VARCHAR},
+        #{@SRCH_TXT, 	mode=IN,	jdbcType=VARCHAR},
+        #{@SRCH_START_DT, 	mode=IN,	jdbcType=VARCHAR},
+        #{@SRCH_END_DT, 	mode=IN,	jdbcType=VARCHAR},
+        #{@PAGE_NUM, 	mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </select>
+
+  <!--일반게시판/동게시판 상세-->
+  <select id="XI_SP_FMCS_ADMIN_BOARDB_R" statementType="CALLABLE"
+          parameterType="hashMap" resultType="BoardBDto">
+    { CALL
+      XI_SP_FMCS_ADMIN_BOARDB_R(
+        #{@SEQ, 	mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </select>
+
+  <!--공공게시판 수정-->
+  <update id="XI_SP_FMCS_ADMIN_BOARDB_U" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_BOARDB_U(
+        #{@SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@WRITER_NICKNM,	mode=IN,	jdbcType=VARCHAR},
+        #{@WRITER_NM, 	mode=IN,	jdbcType=VARCHAR},
+        #{@TITLE, 		mode=IN,	jdbcType=VARCHAR},
+        #{@CONTENTS, 		mode=IN,	jdbcType=VARCHAR},
+        #{@ADMIN_SEQ, 		mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </update>
+
+  <!--일반/동 게시판 등록-->
+  <insert id="XI_SP_FMCS_ADMIN_BOARDB_C" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+    XI_SP_FMCS_ADMIN_BOARDB_C(
+        #{@GROUP_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@BOARD_TYPE, 	mode=IN,	jdbcType=INTEGER},
+        #{@WRITER_NICKNM,	mode=IN,	jdbcType=VARCHAR},
+        #{@WRITER_NM, 	mode=IN,	jdbcType=VARCHAR},
+        #{@TITLE, 		mode=IN,	jdbcType=VARCHAR},
+        #{@CONTENTS, 		mode=IN,	jdbcType=VARCHAR},
+        #{@ADMIN_SEQ, 		mode=IN,	jdbcType=INTEGER},
+        #{@SEQ, 		mode=OUT,	jdbcType=INTEGER}
+      )
+    }
+  </insert>
+
+  <!--일반/동 게시판 삭제-->
+  <delete id="XI_SP_FMCS_ADMIN_BOARDB_D" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_BOARDB_D(
+        #{@SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@DEL_TYPE, 	mode=IN,	jdbcType=VARCHAR},
+        #{@ADMIN_SEQ, 		mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </delete>
+
+  <!--동게시판 동 등록-->
+  <insert id="XI_SP_FMCS_ADMIN_BOARDB_DONG_C" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_BOARDB_DONG_C(
+        #{@SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@DONG_STR, 		mode=IN,	jdbcType=VARCHAR}
+      )
+    }
+  </insert>
+</mapper>

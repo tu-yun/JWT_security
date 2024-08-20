@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xi.fmcs.domain.login.repository.LoginRepository">
+	
+	<!-- 로그인 정보 확인 -->
+	<select id="XI_SP_R_FMCS_ADMIN_MEMBER_BY_EMAIL_R" statementType="CALLABLE"
+	 								parameterType="hashMap" resultType="AdminMemberLoginDto">
+		{ CALL 
+			XI_SP_R_FMCS_ADMIN_MEMBER_BY_EMAIL_R(
+				#{@EMAIL, mode=IN, jdbcType=VARCHAR}
+			)
+		}
+	</select>
+	
+	<!-- 로그인 성공(login 정보 DB 업데이트) -->
+	<update id="XI_SP_R_FMCS_ADMIN_LOGIN_SUCCESS_U" statementType="CALLABLE" parameterType="hashMap">
+		{ CALL 
+			XI_SP_R_FMCS_ADMIN_LOGIN_SUCCESS_U(
+				#{@EMAIL, 			mode=IN, 	jdbcType=VARCHAR},
+				#{@LOGIN_IP, 		mode=IN, 	jdbcType=VARCHAR},
+				#{@REFRESH_TOKEN, 	mode=IN, 	jdbcType=VARCHAR},
+				#{@LOGIN_LAST_DATE, mode=OUT, 	jdbcType=TIMESTAMP}
+			)
+		}
+	</update>
+	
+	<!-- 로그인 실패(비밀번호가 틀리면 해당 아이디의 실패 횟수 증가) -->
+	<update id="XI_SP_R_FMCS_ADMIN_LOGIN_FAIL_U" statementType="CALLABLE" parameterType="hashMap">
+		{ CALL 
+			XI_SP_R_FMCS_ADMIN_LOGIN_FAIL_U(
+				#{@EMAIL, 	mode=IN, 	jdbcType=VARCHAR},
+				#{@RET_VAL, mode=OUT, 	jdbcType=INTEGER}
+			)
+		}
+	</update>
+	
+	<!-- 로그아웃 성공(DB 리플래쉬 토큰 삭제) -->
+	<update id="XI_SP_R_FMCS_ADMIN_LOGOUT_SUCCESS_U" statementType="CALLABLE" parameterType="hashMap">
+		{ CALL 
+			XI_SP_R_FMCS_ADMIN_LOGOUT_SUCCESS_U(
+				#{@EMAIL, mode=IN, jdbcType=VARCHAR}
+			)
+		}
+	</update>
+	
+</mapper>

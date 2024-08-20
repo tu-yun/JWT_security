@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xi.fmcs.domain.member.repository.MemberRepository">
+
+  <!--회원 조회-->
+  <select id="XI_SP_FMCS_ADMIN_APT_MEMBER_L" statementType="CALLABLE"
+          parameterType="hashMap" resultType="MemberListResponseDto">
+    { CALL
+      XI_SP_FMCS_ADMIN_APT_MEMBER_L(
+        #{@APT_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@STATUS, 	mode=IN,	jdbcType=INTEGER},
+        #{@START_AUTH_DATE, 	mode=IN,	jdbcType=VARCHAR},
+        #{@END_AUTH_DATE, 	mode=IN,	jdbcType=VARCHAR},
+        #{@APT_DONG, 	mode=IN,	jdbcType=VARCHAR},
+        #{@APT_HO, 	mode=IN,	jdbcType=VARCHAR},
+        #{@SEARCH_VAL, 	mode=IN,	jdbcType=VARCHAR},
+        #{@RESIDENCE_TYPE, 	mode=IN,	jdbcType=INTEGER},
+        #{@HOUSEHOLDER_TYPE, 	mode=IN,	jdbcType=INTEGER},
+        #{@DONG_MNG_YN, 	mode=IN,	jdbcType=VARCHAR},
+        #{@PAGE_NUM, 	mode=IN,	jdbcType=INTEGER},
+        #{@PAGE_SIZE, 	mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </select>
+
+  <!--승인대기, 미승인 회원 조회-->
+  <select id="XI_SP_FMCS_ADMIN_APT_MEMBER_NONE_DATE_L" statementType="CALLABLE"
+          parameterType="hashMap" resultType="MemberWaitListResponseDto">
+    { CALL
+      XI_SP_FMCS_ADMIN_APT_MEMBER_NONE_DATE_L(
+        #{@APT_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@STATUS, 	mode=IN,	jdbcType=INTEGER},
+        #{@APT_DONG, 	mode=IN,	jdbcType=VARCHAR},
+        #{@APT_HO, 	mode=IN,	jdbcType=VARCHAR},
+        #{@SEARCH_VAL, 	mode=IN,	jdbcType=VARCHAR},
+        #{@PAGE_NUM, 	mode=IN,	jdbcType=INTEGER},
+        #{@PAGE_SIZE, 	mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </select>
+
+  <!--전출회원 목록-->
+  <select id="XI_SP_FMCS_ADMIN_APT_MEMBER_MOVE_OUT_L" statementType="CALLABLE"
+          parameterType="hashMap" resultType="MemberListResponseDto">
+    { CALL
+      XI_SP_FMCS_ADMIN_APT_MEMBER_MOVE_OUT_L(
+        #{@APT_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@STATUS, 	mode=IN,	jdbcType=INTEGER},
+        #{@START_AUTH_DATE, 	mode=IN,	jdbcType=VARCHAR},
+        #{@END_AUTH_DATE, 	mode=IN,	jdbcType=VARCHAR},
+        #{@APT_DONG, 	mode=IN,	jdbcType=VARCHAR},
+        #{@APT_HO, 	mode=IN,	jdbcType=VARCHAR},
+        #{@SEARCH_VAL, 	mode=IN,	jdbcType=VARCHAR},
+        #{@RESIDENCE_TYPE, 	mode=IN,	jdbcType=INTEGER},
+        #{@HOUSEHOLDER_TYPE, 	mode=IN,	jdbcType=INTEGER},
+        #{@PAGE_NUM, 	mode=IN,	jdbcType=INTEGER},
+        #{@PAGE_SIZE, 	mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </select>
+
+  <!--회원 등록-->
+  <insert id="XI_SP_FMCS_ADMIN_APT_MEMBER_C" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_APT_MEMBER_C(
+        #{@APT_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@XI_CODE, 	mode=IN,	jdbcType=VARCHAR},
+        #{@APT_DONG, 	mode=IN,	jdbcType=VARCHAR},
+        #{@APT_HO, 	mode=IN,	jdbcType=VARCHAR},
+        #{@NAME, 	mode=IN,	jdbcType=VARCHAR},
+        #{@NICKNAME, 	mode=IN,	jdbcType=VARCHAR},
+        #{@SEX, 	mode=IN,	jdbcType=INTEGER},
+        #{@BIRTHDAY, 	mode=IN,	jdbcType=VARCHAR},
+        #{@PHONE, 	mode=IN,	jdbcType=VARCHAR},
+        #{@RESIDENCE_TYPE, 	mode=IN,	jdbcType=INTEGER},
+        #{@HOUSEHOLDER_TYPE, 	mode=IN,	jdbcType=INTEGER},
+        #{@XIAN_CLUB_YN, 	mode=IN,	jdbcType=VARCHAR},
+        #{@STATUS, 	mode=IN,	jdbcType=INTEGER},
+        #{@RF_CARD_NO, 	mode=IN,	jdbcType=VARCHAR},
+        #{@REG_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@IMAGE_URL, 	mode=IN,	jdbcType=VARCHAR},
+        #{@VOTE_YN, 	mode=IN,	jdbcType=VARCHAR},
+        #{@AUTH_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@UNIQUE_ID, 	mode=IN,	jdbcType=VARCHAR},
+        #{@EMAIL, 	mode=IN,	jdbcType=VARCHAR},
+        #{@SEQ, 	mode=OUT,	jdbcType=INTEGER}
+      )
+    }
+  </insert>
+
+  <!--회원 수정-->
+  <update id="XI_SP_FMCS_ADMIN_APT_MEMBER_U" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_APT_MEMBER_U(
+        #{@SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@NICKNAME,	mode=IN,	jdbcType=VARCHAR},
+        #{@RES_TYPE, 	mode=IN,	jdbcType=INTEGER},
+        #{@HOLDER_TYPE, 		mode=IN,	jdbcType=INTEGER},
+        #{@RF_CARD_NO, 	mode=IN,	jdbcType=VARCHAR},
+        #{@IMAGE_URL, 	mode=IN,	jdbcType=VARCHAR},
+        #{@REG_SEQ, 	mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </update>
+
+  <!--특정 회원 조회-->
+  <select id="XI_SP_FMCS_ADMIN_APT_MEMBER_R" statementType="CALLABLE"
+          parameterType="hashMap" resultType="MemberRDto">
+    { CALL
+      XI_SP_FMCS_ADMIN_APT_MEMBER_R(
+        #{@SEQ, 	mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </select>
+
+  <!--회원 상태변경-->
+  <update id="XI_SP_FMCS_ADMIN_APT_MEMBER_STATUS_U" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_APT_MEMBER_STATUS_U(
+        #{@SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@STATUS, 	mode=IN,	jdbcType=INTEGER},
+        #{@REG_SEQ, 	mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </update>
+
+  <!--MEMBER 테이블 아파트 동대표 설정-->
+  <update id="XI_SP_FMCS_ADMIN_APT_MEMBER_DONG_MNG_U" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_APT_MEMBER_DONG_MNG_U(
+        #{@SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@DONG_MNG_YN, 	mode=IN,	jdbcType=VARCHAR},
+        #{@DONG_MNG_TITLE, 	mode=IN,	jdbcType=VARCHAR},
+        #{@REG_SEQ, 	mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </update>
+
+  <!--MEMBER 테이블 아파트 동대표 취소-->
+  <update id="XI_SP_FMCS_ADMIN_APT_MEMBER_DONG_MNG_CANCEL_U" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_APT_MEMBER_DONG_MNG_CANCEL_U(
+        #{@SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@REG_SEQ, 	mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </update>
+
+  <!--동대표 설정 여부 확인-->
+  <select id="XI_SP_FMCS_ADMIN_APT_MEMBER_DONG_MNG_CNT" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_APT_MEMBER_DONG_MNG_CNT(
+        #{@ARR_SEQ, 	mode=IN,	jdbcType=VARCHAR},
+        #{@COUNT, 	mode=OUT,	jdbcType=INTEGER}
+      )
+    }
+  </select>
+
+  <!--회원 이메일 체크-->
+  <select id="XI_SP_FMCS_ADMIN_XI_MEMBER_EMAIL_CHECK" statementType="CALLABLE"
+          parameterType="hashMap" resultType="INTEGER">
+    { CALL
+      XI_SP_FMCS_ADMIN_APT_MEMBER_DONG_MNG_CNT(
+        #{@EMAIL, 	mode=IN,	jdbcType=VARCHAR}
+      )
+    }
+  </select>
+
+  <!--회원정보 조회(엑셀 다운로드를 위한)-->
+  <select id="XI_SP_FMCS_ADMIN_APT_MEMBER_ALL_L" statementType="CALLABLE"
+          parameterType="hashMap" resultType="MemberExcelDownDto">
+    { CALL
+      XI_SP_FMCS_ADMIN_APT_MEMBER_ALL_L(
+        #{@APT_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@STATUS, 	mode=IN,	jdbcType=INTEGER},
+        #{@START_AUTH_DATE, 	mode=IN,	jdbcType=VARCHAR},
+        #{@END_AUTH_DATE, 	mode=IN,	jdbcType=VARCHAR},
+        #{@APT_DONG, 	mode=IN,	jdbcType=VARCHAR},
+        #{@APT_HO, 	mode=IN,	jdbcType=VARCHAR},
+        #{@SEARCH_VAL, 	mode=IN,	jdbcType=VARCHAR},
+        #{@RESIDENCE_TYPE, 	mode=IN,	jdbcType=INTEGER},
+        #{@HOUSEHOLDER_TYPE, 	mode=IN,	jdbcType=INTEGER},
+        #{@DONG_MNG_YN, 	mode=IN,	jdbcType=VARCHAR}
+      )
+    }
+  </select>
+
+  <!--회원 수정 승인 처리-->
+  <update id="XI_SP_FMCS_ADMIN_APT_MEMBER_INFO_STATUS_U" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_APT_MEMBER_INFO_STATUS_U(
+        #{@SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@RES_TYPE, 	mode=IN,	jdbcType=INTEGER},
+        #{@HOLDER_TYPE, 	mode=IN,	jdbcType=INTEGER},
+        #{@XI_CLUB_YN, 	mode=IN,	jdbcType=VARCHAR},
+        #{@STATUS, 	mode=IN,	jdbcType=INTEGER},
+        #{@RF_CARD_NO, 	mode=IN,	jdbcType=VARCHAR},
+        #{@REG_SEQ, 	mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </update>
+</mapper>

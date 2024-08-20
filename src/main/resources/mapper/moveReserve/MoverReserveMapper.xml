@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xi.fmcs.domain.moveReserve.repository.MoveReserveRepository">
+
+  <!--이사 예약 목록-->
+  <select id="XI_SP_FMCS_ADMIN_APT_MOVE_RESERVE_L" statementType="CALLABLE"
+          parameterType="hashMap" resultType="MoveReserveListResponseDto">
+    { CALL
+      XI_SP_FMCS_ADMIN_APT_MOVE_RESERVE_L(
+        #{@APT_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@DONG, 	mode=IN,	jdbcType=VARCHAR},
+        #{@HO, 	mode=IN,	jdbcType=VARCHAR},
+        #{@S_DATE, 	mode=IN,	jdbcType=VARCHAR},
+        #{@E_DATE, 	mode=IN,	jdbcType=VARCHAR},
+        #{@SCH_VAL, 	mode=IN,	jdbcType=VARCHAR},
+        #{@PAGE_NUM, 	mode=IN,	jdbcType=INTEGER},
+        #{@PAGE_SIZE, mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </select>
+
+  <!--이사 예약 히스토리 목록-->
+  <select id="XI_SP_FMCS_ADMIN_APT_MOVE_RESERVE_HIS_L" statementType="CALLABLE"
+          parameterType="hashMap" resultType="MoveReserveHisListResponseDto">
+    { CALL
+      XI_SP_FMCS_ADMIN_APT_MOVE_RESERVE_HIS_L(
+        #{@APT_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@DONG, 	mode=IN,	jdbcType=VARCHAR},
+        #{@HO, 	mode=IN,	jdbcType=VARCHAR},
+        #{@S_DATE, 	mode=IN,	jdbcType=VARCHAR},
+        #{@E_DATE, 	mode=IN,	jdbcType=VARCHAR},
+        #{@SCH_VAL, 	mode=IN,	jdbcType=VARCHAR},
+        #{@PAGE_NUM, 	mode=IN,	jdbcType=INTEGER},
+        #{@PAGE_SIZE, mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </select>
+
+  <!--달력 이사 예약 목록-->
+  <select id="XI_SP_FMCS_ADMIN_APT_MOVE_RESERVE_CAL_L" statementType="CALLABLE"
+          parameterType="hashMap" resultType="ReserveCalendarDto">
+    { CALL
+      XI_SP_FMCS_ADMIN_APT_MOVE_RESERVE_CAL_L(
+        #{@APT_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@DONG, 	mode=IN,	jdbcType=VARCHAR},
+        #{@EV_NO, 	mode=IN,	jdbcType=INTEGER},
+        #{@START_DATE, 	mode=IN,	jdbcType=VARCHAR},
+        #{@END_DATE, 	mode=IN,	jdbcType=VARCHAR}
+      )
+    }
+  </select>
+
+  <!--이사 예약 저장-->
+  <insert id="XI_SP_FMCS_ADMIN_APT_MOVE_RESERVE_C" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_APT_MOVE_RESERVE_C(
+        #{@APT_SEQ, 		mode=IN,	jdbcType=INTEGER},
+        #{@DONG, 	mode=IN,	jdbcType=VARCHAR},
+        #{@HO, 			mode=IN,	jdbcType=VARCHAR},
+        #{@EV_NO, 			mode=IN,	jdbcType=INTEGER},
+        #{@MOVE_DATE, 			mode=IN,	jdbcType=VARCHAR},
+        #{@APT_MOVE_TIME_SET_SEQ, 			mode=IN,	jdbcType=INTEGER},
+        #{@MOVE_TYPE, 			mode=IN,	jdbcType=INTEGER},
+        #{@MOVE_INFO_MOVE_TYPE, 			mode=IN,	jdbcType=INTEGER},
+        #{@REG_NAME, 			mode=IN,	jdbcType=VARCHAR},
+        #{@IS_ADMIN, 			mode=IN,	jdbcType=VARCHAR},
+        #{@REG_TEL, 			mode=IN,	jdbcType=VARCHAR},
+        #{@REG_SEQ, 			mode=IN,	jdbcType=INTEGER},
+        #{@RET_VAL, 			mode=OUT,	jdbcType=INTEGER}
+      )
+    }
+  </insert>
+
+  <!--이사 예약 저장-->
+  <insert id="XI_SP_FMCS_ADMIN_MOVE_RESERVE_HISTORY_C" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_MOVE_RESERVE_HISTORY_C(
+        #{@APT_SEQ, 		mode=IN,	jdbcType=INTEGER},
+        #{@DONG, 	mode=IN,	jdbcType=VARCHAR},
+        #{@HO, 			mode=IN,	jdbcType=VARCHAR},
+        #{@ELVTR_NO, 			mode=IN,	jdbcType=INTEGER},
+        #{@MOVE_DATE, 			mode=IN,	jdbcType=VARCHAR},
+        #{@APT_MOVE_TIME_SET_SEQ, 			mode=IN,	jdbcType=INTEGER},
+        #{@MOVE_TYPE, 			mode=IN,	jdbcType=INTEGER},
+        #{@REG_NAME, 			mode=IN,	jdbcType=VARCHAR},
+        #{@IS_ADMIN, 			mode=IN,	jdbcType=VARCHAR},
+        #{@REG_TEL, 			mode=IN,	jdbcType=VARCHAR},
+        #{@REG_SEQ, 			mode=IN,	jdbcType=INTEGER},
+        #{@UNIQUE_ID, 			mode=IN,	jdbcType=VARCHAR}
+      )
+    }
+  </insert>
+
+  <!--이사예약 시간설정 조회-->
+  <select id="XI_SP_FMCS_ADMIN_APT_MOVE_TIME_SET_L" statementType="CALLABLE"
+          parameterType="hashMap" resultType="MoveTimeSetDto">
+    { CALL
+      XI_SP_FMCS_ADMIN_APT_MOVE_TIME_SET_L(
+        #{@APT_SEQ, 	mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </select>
+
+  <!--입주기간/앱설정 저장-->
+  <insert id="XI_SP_FMCS_ADMIN_APT_MOVE_SET_C" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_APT_MOVE_SET_C(
+        #{@APT_SEQ, 		mode=IN,	jdbcType=INTEGER},
+        #{@START_DATE, 	mode=IN,	jdbcType=VARCHAR},
+        #{@END_DATE, 			mode=IN,	jdbcType=VARCHAR},
+        #{@ACTION_TYPE, 			mode=IN,	jdbcType=INTEGER},
+        #{@MOVE_TEL, 			mode=IN,	jdbcType=VARCHAR},
+        #{@APP_CONTENTS, 			mode=IN,	jdbcType=VARCHAR},
+        #{@PRE_START_DATE, 			mode=IN,	jdbcType=TIMESTAMP},
+        #{@PRE_END_DATE, 			mode=IN,	jdbcType=TIMESTAMP},
+        #{@REG_SEQ, 			mode=IN,	jdbcType=INTEGER},
+        #{@SEQ, 			mode=OUT,	jdbcType=INTEGER}
+      )
+    }
+  </insert>
+
+  <!--입주기간/앱설정 수정-->
+  <update id="XI_SP_FMCS_ADMIN_APT_MOVE_SET_U" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_APT_MOVE_SET_U(
+        #{@SEQ, 		mode=IN,	jdbcType=INTEGER},
+        #{@START_DATE, 	mode=IN,	jdbcType=VARCHAR},
+        #{@END_DATE, 			mode=IN,	jdbcType=VARCHAR},
+        #{@ACTION_TYPE, 			mode=IN,	jdbcType=INTEGER},
+        #{@MOVE_TEL, 			mode=IN,	jdbcType=VARCHAR},
+        #{@APP_CONTENTS, 			mode=IN,	jdbcType=VARCHAR},
+        #{@PRE_START_DATE, 			mode=IN,	jdbcType=TIMESTAMP},
+        #{@PRE_END_DATE, 			mode=IN,	jdbcType=TIMESTAMP},
+        #{@REG_SEQ, 			mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </update>
+
+  <!--입주기간 / 앱설정 조회-->
+  <select id="XI_SP_FMCS_ADMIN_APT_MOVE_SET_R" statementType="CALLABLE"
+          parameterType="hashMap" resultType="MoveSetResponseDto">
+    { CALL
+      XI_SP_FMCS_ADMIN_APT_MOVE_SET_R(
+        #{@APT_SEQ, 	mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </select>
+
+  <!--해당 호와 동일한 엘레베이터 번호를 가진 이사예약 목록-->
+  <select id="XI_SP_R_FMCS_ADMIN_APT_MOVE_RESERVE_L" statementType="CALLABLE"
+          parameterType="hashMap" resultType="ReserveCalendarDto">
+    { CALL
+      XI_SP_R_FMCS_ADMIN_APT_MOVE_RESERVE_L(
+        #{@APT_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@DONG, 	mode=IN,	jdbcType=VARCHAR},
+        #{@HO, 	mode=IN,	jdbcType=VARCHAR}
+      )
+    }
+  </select>
+
+  <!--이사예약 시간 설정 변경-->
+  <update id="XI_SP_FMCS_ADMIN_APT_MOVE_TIME_SET_U" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_APT_MOVE_TIME_SET_U(
+        #{@SEQ, 		mode=IN,	jdbcType=INTEGER},
+        #{@USER_VIEW, 	mode=IN,	jdbcType=VARCHAR},
+        #{@ADMIN_VIEW, 			mode=IN,	jdbcType=VARCHAR},
+        #{@START_TIME, 			mode=IN,	jdbcType=VARCHAR},
+        #{@END_TIME, 			mode=IN,	jdbcType=VARCHAR},
+        #{@REG_SEQ, 			mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </update>
+
+  <!--이사예약 시간 설정 등록-->
+  <insert id="XI_SP_FMCS_ADMIN_APT_MOVE_TIME_SET_C" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_APT_MOVE_TIME_SET_C(
+        #{@APT_SEQ, 		mode=IN,	jdbcType=INTEGER},
+        #{@ORDERNUM, 		mode=IN,	jdbcType=INTEGER},
+        #{@USER_VIEW, 	mode=IN,	jdbcType=VARCHAR},
+        #{@ADMIN_VIEW, 			mode=IN,	jdbcType=VARCHAR},
+        #{@START_TIME, 			mode=IN,	jdbcType=VARCHAR},
+        #{@END_TIME, 			mode=IN,	jdbcType=VARCHAR},
+        #{@REG_SEQ, 			mode=IN,	jdbcType=INTEGER},
+        #{@SEQ, 			mode=OUT,	jdbcType=INTEGER}
+      )
+    }
+  </insert>
+
+  <!--이사예약 시간 설정 기본-->
+  <insert id="XI_SP_FMCS_SYS_APT_MOVE_TIME_SET_C" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_SYS_APT_MOVE_TIME_SET_C(
+        #{@APT_SEQ, 		mode=IN,	jdbcType=INTEGER},
+        #{@ADMIN_SEQ, 			mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </insert>
+
+  <!--이사예약 시간 설정 기본-->
+  <select id="XI_SP_FMCS_ADMIN_APT_TODAY_MOVE_RESERVE_CNT_R" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_APT_TODAY_MOVE_RESERVE_CNT_R(
+        #{@APT_SEQ, 		mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </select>
+
+  <!--이사예약 취소-->
+  <delete id="XI_SP_FMCS_ADMIN_APT_MOVE_RESERVE_D" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_APT_MOVE_RESERVE_D(
+        #{@APT_SEQ, 		mode=IN,	jdbcType=INTEGER},
+        #{@REG_SEQ, 			mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </delete>
+
+  <!--이사예약 확인-->
+  <select id="XI_SP_FMCS_ADMIN_APT_MOVE_RESERVE_DUBCHK" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_APT_MOVE_RESERVE_DUBCHK(
+        #{@APT_SEQ, 		mode=IN,	jdbcType=INTEGER},
+        #{@DONG, 			mode=IN,	jdbcType=VARCHAR},
+        #{@HO, 			mode=IN,	jdbcType=VARCHAR}
+      )
+    }
+  </select>
+
+  <!--이사예약 상세-->
+  <select id="XI_SP_FMCS_ADMIN_APT_MOVE_RESERVE_DETAIL_R" statementType="CALLABLE"
+          parameterType="hashMap" resultType="MoveReserveDetailResponseDto">
+    { CALL
+    XI_SP_FMCS_ADMIN_APT_MOVE_RESERVE_DETAIL_R(
+    #{@APT_SEQ, 		mode=IN,	jdbcType=INTEGER},
+    #{@DONG, 			mode=IN,	jdbcType=VARCHAR},
+    #{@EV_NO, 			mode=IN,	jdbcType=INTEGER},
+    #{@MOVE_DATE, 			mode=IN,	jdbcType=VARCHAR}
+    )
+    }
+  </select>
+
+  <!--이사예약 카운트-->
+  <select id="XI_SP_FMCS_ADMIN_APT_MOVE_RESERVE_L_DATE" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_APT_MOVE_RESERVE_L_DATE(
+        #{@APT_SEQ, 		mode=IN,	jdbcType=INTEGER},
+        #{@S_DATE, 			mode=IN,	jdbcType=VARCHAR}
+      )
+    }
+  </select>
+
+  <!--이사예약 엑셀 다운로드용 리스트-->
+  <select id="XI_SP_FMCS_ADMIN_APT_MOVE_RESERVE_L_ALL" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_APT_MOVE_RESERVE_L_ALL(
+        #{@APT_SEQ, 		mode=IN,	jdbcType=INTEGER},
+        #{@DONG, 		mode=IN,	jdbcType=VARCHAR},
+        #{@HO, 		mode=IN,	jdbcType=VARCHAR},
+        #{@S_DATE, 		mode=IN,	jdbcType=VARCHAR},
+        #{@E_DATE, 		mode=IN,	jdbcType=VARCHAR},
+        #{@SCH_VAL, 			mode=IN,	jdbcType=VARCHAR}
+      )
+    }
+  </select>
+
+  <!--엘레베이터/이사방법-->
+  <select id="XI_SP_FMCS_ADMIN_APT_MOVE_INFO_R" statementType="CALLABLE"
+          parameterType="hashMap" resultType="ElvtrNoAndMoveTypeDto">
+    { CALL
+      XI_SP_FMCS_ADMIN_APT_MOVE_INFO_R(
+        #{@APT_SEQ, 		mode=IN,	jdbcType=INTEGER},
+        #{@DONG, 		mode=IN,	jdbcType=VARCHAR},
+        #{@FLOOR, 		mode=IN,	jdbcType=VARCHAR},
+        #{@LINE, 			mode=IN,	jdbcType=VARCHAR}
+      )
+    }
+  </select>
+</mapper>

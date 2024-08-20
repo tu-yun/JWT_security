@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xi.fmcs.domain.community.repository.CommunitySetRepository">
+
+  <!-- 커뮤니티 설정 수정 -->
+  <update id="XI_SP_FMCS_ADMIN_BOARDGROUP_U" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_BOARDGROUP_U(
+        #{@SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@BOARD_NM,	mode=IN,	jdbcType=VARCHAR},
+        #{@BOARD_TYPE, 	mode=IN,	jdbcType=VARCHAR},
+        #{@ORD_NUM, 		mode=IN,	jdbcType=INTEGER},
+        #{@ICON_URL, 		mode=IN,	jdbcType=VARCHAR},
+        #{@USE_YN, 		mode=IN,	jdbcType=VARCHAR},
+        #{@ADMIN_SEQ, 		mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </update>
+
+  <!-- 커뮤니티 설정 저장 -->
+  <select id="XI_SP_FMCS_ADMIN_BOARDGROUP_C" statementType="CALLABLE" parameterType="hashMap"
+   resultType="INTEGER">
+    { CALL
+      XI_SP_FMCS_ADMIN_BOARDGROUP_C(
+        #{@APT_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@PARENT_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@BOARD_NM,	mode=IN,	jdbcType=VARCHAR},
+        #{@BOARD_TYPE, 	mode=IN,	jdbcType=VARCHAR},
+        #{@BOARD_LVL, 		mode=IN,	jdbcType=INTEGER},
+        #{@ORD_NUM, 		mode=IN,	jdbcType=INTEGER},
+        #{@ICON_URL, 		mode=IN,	jdbcType=VARCHAR},
+        #{@FIX_YN, 		mode=IN,	jdbcType=VARCHAR},
+        #{@USE_YN, 		mode=IN,	jdbcType=VARCHAR},
+        #{@ADMIN_SEQ, 		mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </select>
+
+  <!-- 커뮤니티 설정 저장 -->
+  <select id="XI_SP_FMCS_ADMIN_BOARDGROUP_L" statementType="CALLABLE"
+          parameterType="hashMap" resultType="BoardGroupResponseDto">
+    { CALL
+      XI_SP_FMCS_ADMIN_BOARDGROUP_L(
+        #{@APT_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@PARENT_SEQ, 		mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </select>
+
+  <!-- 커뮤니티 설정 게시판 삭제 -->
+  <delete id="XI_SP_FMCS_ADMIN_BOARDGROUP_D" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_BOARDGROUP_D(
+        #{@SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@ADMIN_SEQ, 		mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </delete>
+
+  <!-- 노출항목 설정 -->
+  <update id="XI_SP_FMCS_ADMIN_BOARD_DISPLAY_U" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+    XI_SP_FMCS_ADMIN_BOARD_DISPLAY_U(
+        #{@APT_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@BRD_DONGHO_DISP,	mode=IN,	jdbcType=VARCHAR},
+        #{@BRD_USERNM_DISP, 	mode=IN,	jdbcType=VARCHAR},
+        #{@ADMIN_SEQ, 		mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </update>
+
+  <!-- 노출항목 상세 -->
+  <select id="XI_SP_FMCS_ADMIN_BOARD_DISPLAY_R" statementType="CALLABLE"
+          parameterType="hashMap" resultType="BoardDisplaySetDto">
+    { CALL
+      XI_SP_FMCS_ADMIN_BOARD_DISPLAY_R(
+        #{@APT_SEQ, 	mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </select>
+
+</mapper>

@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xi.fmcs.domain.vote.repository.VoteRepository">
+
+  <!-- 투표/설문 목록 조회 -->
+  <select id="XI_SP_FMCS_ADMIN_VOTE_L" statementType="CALLABLE"
+          parameterType="hashMap" resultType="VoteListResponseDto">
+    { CALL
+      XI_SP_FMCS_ADMIN_VOTE_L(
+        #{@APT_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@SRCH_TXT, 	mode=IN,	jdbcType=VARCHAR},
+        #{@SRCH_TYPE, 	mode=IN,	jdbcType=VARCHAR},
+        #{@SRCH_START_DT, 	mode=IN,	jdbcType=VARCHAR},
+        #{@SRCH_END_DT, 	mode=IN,	jdbcType=VARCHAR},
+        #{@SRCH_ST, 	mode=IN,	jdbcType=VARCHAR},
+        #{@PAGE_NUM, 	mode=IN,	jdbcType=INTEGER},
+        #{@PAGE_SIZE, 	mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </select>
+
+  <!-- 투표(설문) 상세 -->
+  <select id="XI_SP_FMCS_ADMIN_VOTE_R" statementType="CALLABLE"
+          parameterType="hashMap" resultType="VoteDetailDto">
+    { CALL
+      XI_SP_FMCS_ADMIN_VOTE_R(
+        #{@SEQ, 	mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </select>
+
+  <!-- 질문 목록(투표/설문 수정 , 설문 상세) -->
+  <select id="XI_SP_FMCS_ADMIN_VOTE_QUESTION_L" statementType="CALLABLE"
+          parameterType="hashMap" resultType="VoteQuestionResponseDto">
+    { CALL
+      XI_SP_FMCS_ADMIN_VOTE_QUESTION_L(
+        #{@VOTE_INFO_SEQ, 	mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </select>
+
+  <!-- 투표 질문/답안 항목 목록(상세) -->
+  <select id="XI_SP_FMCS_ADMIN_VOTE_QUESTION_ANSWER1_L" statementType="CALLABLE"
+          parameterType="hashMap" resultType="VoteQuestionAnswerDto">
+    { CALL
+      XI_SP_FMCS_ADMIN_VOTE_QUESTION_ANSWER1_L(
+        #{@VOTE_INFO_SEQ, 	mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </select>
+
+  <!-- 투표/설문 질문답안항목 목록(질문/답안 수정) -->
+  <select id="XI_SP_FMCS_ADMIN_VOTE_QUESTION_ANSWER2_L" statementType="CALLABLE"
+          parameterType="hashMap" resultType="VoteQuestionAnswerDto">
+    { CALL
+      XI_SP_FMCS_ADMIN_VOTE_QUESTION_ANSWER2_L(
+        #{@ANSWER_TYPE, 	mode=IN,	jdbcType=INTEGER},
+        #{@VOTE_QUESTION_SEQ, 	mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </select>
+
+  <!-- 투표 인명부(참여자)목록 -->
+  <select id="XI_SP_FMCS_ADMIN_VOTE_MEMBER_L" statementType="CALLABLE"
+          parameterType="hashMap" resultType="VoteMemberDto">
+    { CALL
+      XI_SP_FMCS_ADMIN_VOTE_MEMBER_L(
+       #{@VOTE_INFO_SEQ, 	mode=IN,	jdbcType=INTEGER},
+       #{@VOTE_DIV, 	mode=IN,	jdbcType=INTEGER},
+       #{@PAGE_NUM, 	mode=IN,	jdbcType=INTEGER}
+     )
+    }
+  </select>
+
+  <!-- 설문 참여자 목록 -->
+  <select id="XI_SP_FMCS_ADMIN_VOTE_MEMBER2_L" statementType="CALLABLE"
+          parameterType="hashMap" resultType="VoteMemberDto">
+    { CALL
+      XI_SP_FMCS_ADMIN_VOTE_MEMBER2_L(
+        #{@VOTE_INFO_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@PAGE_NUM, 	mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </select>
+
+  <!-- 투표/설문 기본정보 수정 -->
+  <update id="XI_SP_FMCS_ADMIN_VOTE_INFO_U" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_VOTE_INFO_U(
+        #{@SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@VOTE_GENDER, 	mode=IN,	jdbcType=INTEGER},
+        #{@VOTE_AGE, 	mode=IN,	jdbcType=VARCHAR},
+        #{@TITLE, 	mode=IN,	jdbcType=VARCHAR},
+        #{@CONTENTS, 	mode=IN,	jdbcType=VARCHAR},
+        #{@START_DATE, 	mode=IN,	jdbcType=VARCHAR},
+        #{@END_DATE, 	mode=IN,	jdbcType=VARCHAR},
+        #{@ADMIN_SEQ, 	mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </update>
+
+  <!-- 투표/설문 기본정보 등장 -->
+  <insert id="XI_SP_FMCS_ADMIN_VOTE_INFO_C" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_VOTE_INFO_C(
+        #{@APT_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@VOTE_TYPE, 	mode=IN,	jdbcType=INTEGER},
+        #{@VOTE_GENDER, 	mode=IN,	jdbcType=INTEGER},
+        #{@VOTE_AGE, 	mode=IN,	jdbcType=VARCHAR},
+        #{@TITLE, 	mode=IN,	jdbcType=VARCHAR},
+        #{@CONTENTS, 	mode=IN,	jdbcType=VARCHAR},
+        #{@START_DATE, 	mode=IN,	jdbcType=VARCHAR},
+        #{@END_DATE, 	mode=IN,	jdbcType=VARCHAR},
+        #{@ADMIN_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@SEQ, 	mode=OUT,	jdbcType=INTEGER}
+      )
+    }
+  </insert>
+
+  <!-- 동 저장(설문) -->
+  <insert id="XI_SP_FMCS_ADMIN_VOTE_DONG_C" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_VOTE_DONG_C(
+        #{@SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@DONG_STR, 	mode=IN,	jdbcType=VARCHAR}
+      )
+    }
+  </insert>
+
+  <!-- 투표/설문 삭제 -->
+  <delete id="XI_SP_FMCS_ADMIN_VOTE_D" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_VOTE_D(
+        #{@SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@RET_VAL, 	mode=OUT,	jdbcType=INTEGER}
+      )
+    }
+  </delete>
+
+  <!-- 투표(설문) 질문,답안유형 등록 -->
+  <insert id="XI_SP_FMCS_ADMIN_VOTE_QUESTION_C" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_VOTE_QUESTION_C(
+        #{@VOTE_INFO_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@QUESTION_TITLE, 	mode=IN,	jdbcType=VARCHAR},
+        #{@ANSWER_TYPE, 	mode=IN,	jdbcType=INTEGER},
+        #{@VOTE_CHOICE_CNT, 	mode=IN,	jdbcType=INTEGER},
+        #{@ANSWER_ITEM_TYPE, 	mode=IN,	jdbcType=INTEGER},
+        #{@ADMIN_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@VOTE_QUESTION_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@SEQ, 	mode=OUT,	jdbcType=INTEGER}
+      )
+    }
+  </insert>
+
+  <!-- 답변유형 저장 -->
+  <insert id="XI_SP_FMCS_ADMIN_VOTE_ANSWER_C" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_VOTE_ANSWER_C(
+        #{@ANSWER_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@ANSWER_NO, 	mode=IN,	jdbcType=INTEGER},
+        #{@ANSWER_TITLE, 	mode=IN,	jdbcType=VARCHAR},
+        #{@ANSWER_CONTENTS, 	mode=IN,	jdbcType=VARCHAR},
+        #{@ADMIN_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@VOTE_QUESTION_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@SEQ, 	mode=OUT,	jdbcType=INTEGER}
+      )
+    }
+  </insert>
+
+  <!-- 투표/설문 질문 파일 목록 -->
+  <select id="XI_SP_FMCS_ADMIN_VOTE_QUESTION_FILE_L" statementType="CALLABLE"
+          parameterType="hashMap" resultType="FileInfoDetailDto">
+    { CALL
+      XI_SP_FMCS_ADMIN_VOTE_QUESTION_FILE_L(
+        #{@VOTE_QUESTION_SEQ, 	mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </select>
+
+  <!-- 투표(설문) 질문/답 삭제 -->
+  <delete id="XI_SP_FMCS_ADMIN_VOTE_QUESTION_D" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_VOTE_QUESTION_D(
+        #{@VOTE_QUESTION_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@RET_VAL, 	mode=OUT,	jdbcType=INTEGER}
+      )
+    }
+  </delete>
+
+  <!-- 투표(설문) 답 삭제 -->
+  <delete id="XI_SP_FMCS_ADMIN_VOTE_ANSWER_D" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_VOTE_ANSWER_D(
+        #{@VOTE_INFO_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@ANSWER_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@RET_VAL, 	mode=OUT,	jdbcType=INTEGER}
+      )
+    }
+  </delete>
+
+  <!-- 투표/설문 결과 목록(결과 팝업) -->
+  <select id="XI_SP_FMCS_ADMIN_VOTE_QUESTION_RESULT_L" statementType="CALLABLE"
+          parameterType="hashMap" resultType="VoteQuestionAnswerDto">
+    { CALL
+      XI_SP_FMCS_ADMIN_VOTE_QUESTION_RESULT_L(
+        #{@ANSWER_TYPE, 	mode=IN,	jdbcType=INTEGER},
+        #{@VOTE_INFO_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@VOTE_QUESTION_SEQ, 	mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </select>
+
+  <!-- 투표 인명부 등록 -->
+  <insert id="XI_SP_FMCS_ADMIN_VOTE_MEMBER_C" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_VOTE_MEMBER_C(
+        #{@APT_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@VOTE_INFO_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@VOTE_RESIDENCE, 	mode=IN,	jdbcType=VARCHAR},
+        #{@VOTE_MEMBER_AGE_DATE, 	mode=IN,	jdbcType=VARCHAR},
+        #{@VOTE_MEMBER_AUTH_DATE, 	mode=IN,	jdbcType=VARCHAR},
+        #{@DONG_STR, 	mode=IN,	jdbcType=VARCHAR},
+        #{@RET_VAL, 	mode=OUT,	jdbcType=INTEGER}
+      )
+    }
+  </insert>
+
+  <!-- 투표 인명부(참여자)/설문참여자 목록(엑셀) -->
+  <select id="XI_SP_FMCS_ADMIN_VOTE_MEMBER_EXCEL_L" statementType="CALLABLE"
+          parameterType="hashMap" resultType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_VOTE_MEMBER_EXCEL_L(
+        #{@VOTE_INFO_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@VOTE_TYPE, 	mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </select>
+</mapper>

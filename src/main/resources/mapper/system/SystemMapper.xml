@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xi.fmcs.domain.system.repository.GsRepository">
+	
+	<!-- 관리자 GS마스터 목록 -->
+	<select id="XI_SP_FMCS_ADMIN_GS_MEMBER_L" statementType="CALLABLE" resultType="GsAdminMemberDto">
+		{ CALL
+			XI_SP_FMCS_ADMIN_GS_MEMBER_L()
+		}	
+	</select>
+
+	<!-- 관리자 GS마스터 상세 -->
+	<select id="XI_SP_FMCS_ADMIN_MEMBER_DETAIL_R" statementType="CALLABLE"
+	 								parameterType="hashMap" resultType="GsAdminMemberDetailDto">
+		{ CALL 
+			XI_SP_FMCS_ADMIN_MEMBER_DETAIL_R(
+				#{@SEQ, 	mode=IN,	jdbcType=INTEGER}
+			)
+		}
+	</select>	
+</mapper>

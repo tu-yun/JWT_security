@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xi.fmcs.domain.community.repository.MemSaveRepository">
+
+  <!-- 회원글보관함 목록 -->
+  <select id="XI_SP_FMCS_ADMIN_BOARD_MEMSAVE_L" statementType="CALLABLE"
+          parameterType="hashMap" resultType="MemSaveListDto">
+    { CALL
+      XI_SP_FMCS_ADMIN_BOARD_MEMSAVE_L(
+        #{@APT_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@PARENT_SEQ, 		mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </select>
+
+  <!-- 회원글보관함 상세 -->
+  <select id="XI_SP_FMCS_ADMIN_BOARD_MEMSAVE_R" statementType="CALLABLE"
+          parameterType="hashMap" resultType="MemSaveDetailResponseDto">
+    { CALL
+      XI_SP_FMCS_ADMIN_BOARD_MEMSAVE_R(
+      #{@SEQ, 	mode=IN,	jdbcType=INTEGER},
+      #{@BOARD_TYPE, 		mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </select>
+</mapper>

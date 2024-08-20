@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xi.fmcs.support.repository.CommonRepository">
+	
+	<!-- 상태 메시지 가져오기 -->
+	<select id="XI_SP_R_FMCS_STATUS_MESSAGE_R" statementType="CALLABLE" parameterType="hashMap">
+		{ CALL 
+			XI_SP_R_FMCS_STATUS_MESSAGE_R(
+				#{@MSG_CODE, mode=IN, 	jdbcType=VARCHAR},
+				#{@MSG_CONT, mode=OUT,	jdbcType=VARCHAR}
+			)
+		}
+	</select>
+	
+</mapper>

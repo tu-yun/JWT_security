@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xi.fmcs.domain.adminCompany.repository.AdminCompanyRepository">
+
+	<!-- 업체 추가 -->
+	<insert id="XI_SP_FMCS_ADMIN_COMPANY_C" statementType="CALLABLE" parameterType="hashMap">
+		{ CALL 
+			XI_SP_FMCS_ADMIN_COMPANY_C(
+				#{@COMPANY, 			mode=IN,	jdbcType=VARCHAR},
+				#{@COMPANY_PRESIDENT,	mode=IN,	jdbcType=VARCHAR},
+				#{@FAX_NO, 				mode=IN,	jdbcType=VARCHAR},
+				#{@TEL_NO, 				mode=IN,	jdbcType=VARCHAR},
+				#{@COMPANY_NO, 			mode=IN,	jdbcType=VARCHAR},
+				#{@REG_SEQ, 			mode=IN,	jdbcType=INTEGER},
+				#{@seq, 				mode=OUT,	jdbcType=INTEGER}
+			)
+		}
+	</insert>	
+
+	<!-- 업체 수정 -->
+	<update id="XI_SP_FMCS_ADMIN_COMPANY_U" statementType="CALLABLE" parameterType="hashMap">
+		{ CALL 
+			XI_SP_FMCS_ADMIN_COMPANY_U(
+				#{@SEQ, 				mode=OUT,	jdbcType=INTEGER}
+				#{@COMPANY, 			mode=IN,	jdbcType=VARCHAR},
+				#{@COMPANY_PRESIDENT,	mode=IN,	jdbcType=VARCHAR},
+				#{@FAX_NO, 				mode=IN,	jdbcType=VARCHAR},
+				#{@TEL_NO, 				mode=IN,	jdbcType=VARCHAR},
+				#{@COMPANY_NO, 			mode=IN,	jdbcType=VARCHAR},
+				#{@REG_SEQ, 			mode=IN,	jdbcType=INTEGER}
+			)
+		}
+	</update>
+
+	<!-- 업체 삭제 -->
+	<delete id="XI_SP_FMCS_ADMIN_COMPANY_D" statementType="CALLABLE" parameterType="hashMap">
+		{ CALL 
+			XI_SP_FMCS_ADMIN_COMPANY_D(
+				#{@seq, 	mode=IN,	jdbcType=VARCHAR},
+				#{@reg_seq,	mode=IN,	jdbcType=VARCHAR},
+				#{@retval, 	mode=OUT,	jdbcType=INTEGER}
+			)
+		}
+	</delete>	
+
+	<!-- 업체 조회 -->
+	<select id="XI_SP_FMCS_ADMIN_COMPANY_L" statementType="CALLABLE"
+	 								parameterType="hashMap" resultType="AdminCompanyListDto">
+		{ CALL 
+			XI_SP_FMCS_ADMIN_COMPANY_L(
+				#{@keyword, 	mode=IN,	jdbcType=VARCHAR},
+				#{@page_num,	mode=IN,	jdbcType=INTEGER},
+				#{@page_size, 	mode=IN,	jdbcType=INTEGER},
+				#{@USE_YN, 		mode=IN,	jdbcType=VARCHAR}
+			)
+		}
+	</select>
+
+	<!-- 업체 상세조회 -->
+	<select id="XI_SP_FMCS_ADMIN_COMPANY_R" statementType="CALLABLE"
+	 								parameterType="hashMap" resultType="AdminCompanyDetailDto">
+		{ CALL 
+			XI_SP_FMCS_ADMIN_COMPANY_R(
+				#{@SEQ, 	mode=IN,	jdbcType=INTEGER}
+			)
+		}
+	</select>
+
+	<!-- 사업자번호 중복체크 -->
+	<select id="XI_SP_FMCS_ADMIN_COMPANY_NO_CHECK" statementType="CALLABLE" parameterType="hashMap">
+		{ CALL 
+			XI_SP_FMCS_ADMIN_COMPANY_NO_CHECK(
+				#{@COMPANY_NO,	mode=IN,	jdbcType=VARCHAR},
+				#{@RET_VAL, 	mode=OUT,	jdbcType=INTEGER}
+			)
+		}
+	</select>
+
+	<!-- 사업자번호 자신제외 중복체크 -->
+	<select id="XI_SP_FMCS_ADMIN_COMPANY_EXCEPT_ME_COMPANY_NO_CHECK_BY_SEQ_DEV" statementType="CALLABLE" parameterType="hashMap">
+		{ CALL 
+			XI_SP_FMCS_ADMIN_COMPANY_EXCEPT_ME_COMPANY_NO_CHECK_BY_SEQ_DEV(
+				#{@SEQ,			mode=IN,	jdbcType=INTEGER},
+				#{@COMPANY_NO, 	mode=IN,	jdbcType=VARCHAR},
+				#{@RET_VAL, 	mode=OUT,	jdbcType=INTEGER}
+			)
+		}
+	</select>
+
+	<!-- 아파트 고유번호로 담당 회사 찾기 -->
+	<select id="XI_SP_FMCS_ADMIN_COMPANY_BY_APT_SEQ_R" statementType="CALLABLE"
+	 								parameterType="hashMap" resultType="AdminCompanyDetailDto">
+		{ CALL 
+			XI_SP_FMCS_ADMIN_COMPANY_BY_APT_SEQ_R(
+				#{@APT_SEQ,	mode=IN,	jdbcType=INTEGER}
+			)
+		}
+	</select>
+
+	<!-- 업체관리자도 같이 찾는 프로시저 -->
+	<select id="XI_SP_R_FMCS_ADMIN_COMPANY_BY_SEQ_R" statementType="CALLABLE"
+	 								parameterType="hashMap" resultType="AptMngCompanyDto">
+		{ CALL 
+			XI_SP_R_FMCS_ADMIN_COMPANY_BY_SEQ_R(
+				#{@COMPANY_SEQ,	mode=IN,	jdbcType=INTEGER}
+			)
+		}
+	</select>
+
+	<!-- 현재 업체를 제외한 다른 업체 조회 -->
+	<select id="XI_SP_R_FMCS_ADMIN_COMPANY_EXCEPT_ME_COMPANY_BY_SEQ_R" statementType="CALLABLE"
+	 								parameterType="hashMap" resultType="AptMngCompanyDto">
+		{ CALL 
+			XI_SP_R_FMCS_ADMIN_COMPANY_EXCEPT_ME_COMPANY_BY_SEQ_R(
+				#{@COMPANY_SEQ, mode=IN,	jdbcType=INTEGER},
+				#{@KEYWORD, 	mode=IN,	jdbcType=VARCHAR}
+			)
+		}
+	</select>
+	
+</mapper>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xi.fmcs.domain.community.repository.CommunityRepository">
+
+  <!--동게시판 단지 동목록-->
+  <select id="XI_SP_FMCS_ADMIN_BOARD_APTDONG_L" statementType="CALLABLE"
+          parameterType="hashMap" resultType="String">
+    { CALL
+      XI_SP_FMCS_ADMIN_BOARD_APTDONG_L(
+        #{@GROUP_SEQ, 	mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </select>
+
+  <!--메인페이지 게시판 목록-->
+  <select id="XI_SP_FMCS_ADMIN_BOARD_MAIN_L" statementType="CALLABLE"
+          parameterType="hashMap" resultType="BoardMainListDto">
+    { CALL
+      XI_SP_FMCS_ADMIN_BOARD_MAIN_L(
+        #{@APT_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@BOARD_TYPE, 	mode=IN,	jdbcType=VARCHAR}
+      )
+    }
+  </select>
+
+  <!-- 아파트 동호 리스트 -->
+  <select id="XI_SP_FMCS_ADMIN_BOARD_APTDONGHO_L" statementType="CALLABLE"
+          parameterType="hashMap" resultType="AptDongHoResponseDto">
+    { CALL
+      XI_SP_FMCS_ADMIN_BOARD_APTDONGHO_L(
+        #{@APT_SEQ, 	mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </select>
+
+  <!--단지별 게시판 그룹 목록-->
+  <select id="XI_SP_FMCS_ADMIN_BOARDGROUP_APT_L" statementType="CALLABLE"
+          parameterType="hashMap" resultType="BoardGroupAptListDto">
+    { CALL
+    XI_SP_FMCS_ADMIN_BOARDGROUP_APT_L(
+        #{@APT_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@GROUP_PARENT_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@GROUP_SEQ, 	mode=IN,	jdbcType=INTEGER}
+        )
+    }
+  </select>
+</mapper>

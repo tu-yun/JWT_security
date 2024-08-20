@@ -1,0 +1,13 @@
+# Swagger
+springdoc:
+  show-login-endpoint: true
+  packages-to-scan: com.xi.fmcs.domain
+  swagger-ui:
+    disable-swagger-default-url: true
+    display-request-duration: true
+    tags-sorter: alpha 
+    operations-sorter: alpha
+    doc-expansion: none
+    syntax-highlight:
+      theme: nord
+  pre-loading-enabled: true

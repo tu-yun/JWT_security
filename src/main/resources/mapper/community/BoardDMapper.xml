@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xi.fmcs.domain.community.repository.BoardDRepository">
+
+  <!--질문답변게시판 목록-->
+  <select id="XI_SP_FMCS_ADMIN_BOARDD_L" statementType="CALLABLE"
+          parameterType="hashMap" resultType="BoardDListDto">
+    { CALL
+      XI_SP_FMCS_ADMIN_BOARDD_L(
+        #{@GROUP_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@SRCH_DONG, 	mode=IN,	jdbcType=VARCHAR},
+        #{@SRCH_HO, 	mode=IN,	jdbcType=VARCHAR},
+        #{@SRCH_TXT, 	mode=IN,	jdbcType=VARCHAR},
+        #{@SRCH_START_DT, 	mode=IN,	jdbcType=VARCHAR},
+        #{@SRCH_END_DT, 	mode=IN,	jdbcType=VARCHAR},
+        #{@SRCH_REPLY_ST, 	mode=IN,	jdbcType=VARCHAR},
+        #{@PAGE_NUM, 	mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </select>
+
+  <!--질문답변게시판 상세-->
+  <select id="XI_SP_FMCS_ADMIN_BOARDD_R" statementType="CALLABLE"
+          parameterType="hashMap" resultType="BoardDDto">
+    { CALL
+      XI_SP_FMCS_ADMIN_BOARDD_R(
+        #{@SEQ, 	mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </select>
+
+  <!--질문답변게시판 수정-->
+  <update id="XI_SP_FMCS_ADMIN_BOARDD_U" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_BOARDD_U(
+        #{@SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@ANSWER,	mode=IN,	jdbcType=VARCHAR},
+        #{@ADMIN_SEQ, 		mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </update>
+
+
+  <!--질문답변게시판 삭제-->
+  <delete id="XI_SP_FMCS_ADMIN_BOARDD_D" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_BOARDD_D(
+        #{@SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@DEL_TYPE, 	mode=IN,	jdbcType=VARCHAR},
+        #{@ADMIN_SEQ, 		mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </delete>
+
+</mapper>

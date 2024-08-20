@@ -1,0 +1,76 @@
+# Server
+server:
+  port: 8000
+  servlet: 
+    contextPath: '/api/v1/fmcs'
+    encoding:
+      charset: UTF-8
+  error:
+    include-exception: false
+    include-stacktrace: never
+    path: '/error'
+
+# Spring
+spring:
+  config:
+    import: classpath:security.yml, classpath:swagger.yml, classpath:define.yml 
+  jpa:
+    database-platform: org.hibernate.dialect.OracleDialect
+    show-sql: true
+    hibernate:
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+    properties:
+      hibernate:
+        format_sql: true
+        proc.param_null_passing: true
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:localhost:1521:XE
+    username: LOGIN
+    password: 1111
+  mvc:
+    pathmatch:
+      matching-strategy: ant-path-matcher
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      add-mappings: false
+  devtools:
+    livereload:
+      enabled: true
+
+mybatis:
+  type-aliases-package: com.xi.fmcs
+  mapper-locations: classpath:mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+  
+logging:
+  level:
+    com:
+      zaxxer: INFO
+    javax:
+      sql:
+        DataSource: OFF
+    jdbc:
+      audit: OFF
+      resultset: OFF
+      resultsettable: INFO
+      sqlonly: OFF
+      sqltiming: INFO
+      connection: OFF
+    org:
+      springframework:
+        transaction:
+          interceptor: TRACE
+          support: INFO
+      apache:
+        coyote:
+          http11: debug
+    orm:
+      jpa: INFO
+      hibernate:
+        type:
+          descriptor:
+            sql: trace

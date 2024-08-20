@@ -1,0 +1,46 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.6.14'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'com.xi'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    //version 명시가 안되어 있을시 boot 버전에 맞는 최적화 버전을 의존성 추가한다.
+    implementation 'org.springframework.boot:spring-boot-starter-web'				//web
+    implementation 'org.springframework.boot:spring-boot-starter-security'      	//security
+	implementation 'com.auth0:java-jwt:4.3.0'										//jwt
+    implementation 'org.springframework.boot:spring-boot-starter-json'          	//json
+	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.14.2'	//ObjectMapper에서 LocalDateTime사용하기 위해서
+    implementation 'org.springframework.boot:spring-boot-starter-validation'		//@Valid 사용하기 위해
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'		//mybatis
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'      	//jpa
+    implementation 'org.springdoc:springdoc-openapi-ui:1.6.14'						//swagger
+    implementation 'commons-io:commons-io:2.11.0'									//fileUpload
+	implementation 'org.springframework.boot:spring-boot-starter-mail'				//main
+	implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'			//jdbc log
+		
+    runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'            					//msslq jdbc
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'     			//코드 변경시 자동 재시작 - 개발only
+
+    compileOnly 'org.projectlombok:lombok'            								//플러그인 없이 롬복 사용
+    annotationProcessor 'org.projectlombok:lombok'
+
+    implementation 'org.apache.poi:poi:5.0.0'                                    	// xls
+    implementation 'org.apache.poi:poi-ooxml:5.0.0'                             	// xlsx
+    implementation 'org.springframework.boot:spring-boot-starter-batch'         	// 대용량처리위한 batch
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'			//test
+    testImplementation 'org.springframework.security:spring-security-test'			//test
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

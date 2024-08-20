@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xi.fmcs.domain.admin.repository.AdminMemberRepository">
+
+	<!-- 관리자 비번변경전 비밀번호 확인 -->
+	<select id="XI_SP_FMCS_ADMIN_MEMBER_PWD_CHECK" statementType="CALLABLE" parameterType="hashMap">
+		{ CALL 
+			XI_SP_FMCS_ADMIN_MEMBER_PWD_CHECK(
+				#{@SEQ, 	mode=IN,	jdbcType=INTEGER},
+				#{@PWD, 	mode=IN,	jdbcType=VARCHAR},
+				#{@RET_VAL, mode=OUT,	jdbcType=INTEGER}
+			)
+		}
+	</select>
+	
+	<!-- 관리자 비번 재설정 -->
+	<update id="XI_SP_FMCS_ADMIN_MEMBER_PWD_RE_SET_U2" statementType="CALLABLE" parameterType="hashMap">
+		{ CALL 
+			XI_SP_FMCS_ADMIN_MEMBER_PWD_RE_SET_U2(
+				#{@SEQ, 	mode=IN,	jdbcType=INTEGER},
+				#{@NEW_PWD, mode=IN,	jdbcType=VARCHAR},
+				#{@REG_SEQ, mode=IN,	jdbcType=INTEGER}
+			)
+		}
+	</update>
+	
+	<!-- 관리자 관리 로그 -->
+	<insert id="XI_SP_FMCS_ADMIN_MEMBER_LOG_C" statementType="CALLABLE" parameterType="hashMap">
+		{ CALL 
+			XI_SP_FMCS_ADMIN_MEMBER_LOG_C(
+				#{@login_id, 		mode=IN,	jdbcType=VARCHAR},
+				#{@login_history, 	mode=IN,	jdbcType=VARCHAR},
+				#{@reg_ip, 			mode=IN,	jdbcType=VARCHAR}
+			)
+		}
+	</insert>	
+	
+	<!-- 관리자 휴대폰번호 중복 체크 -->
+	<select id="XI_SP_FMCS_ADMIN_MEMBER_MOBILE_NO_CHECK" statementType="CALLABLE" parameterType="hashMap">
+		{ CALL 
+			XI_SP_FMCS_ADMIN_MEMBER_MOBILE_NO_CHECK(
+				#{@MOBILE_NO,	mode=IN,	jdbcType=VARCHAR},
+				#{@RET_VAL,		mode=OUT,	jdbcType=INTEGER}
+			)
+		}
+	</select>
+	
+	<!-- 관리자 이메일로 중복 체크 -->
+	<select id="XI_SP_FMCS_ADMIN_MEMBER_EMAIL_CHECK" statementType="CALLABLE" parameterType="hashMap">
+		{ CALL 
+			XI_SP_FMCS_ADMIN_MEMBER_EMAIL_CHECK(
+				#{@EMAIL,	mode=IN,	jdbcType=VARCHAR},
+				#{@RET_VAL,	mode=OUT,	jdbcType=INTEGER}
+			)
+		}
+	</select>	
+	
+	<!-- 관리자 나를 제외하고 휴대폰번호 중복 체크 -->
+	<select id="XI_SP_FMCS_ADMIN_MEMBER_EXCEPT_ME_MOBILE_NO_CHECK" statementType="CALLABLE" parameterType="hashMap">
+		{ CALL 
+			XI_SP_FMCS_ADMIN_MEMBER_EXCEPT_ME_MOBILE_NO_CHECK(
+				#{@SEQ, 		mode=IN,	jdbcType=INTEGER},
+				#{@MOBILE_NO, 	mode=IN,	jdbcType=VARCHAR},
+				#{@RET_VAL,		mode=OUT,	jdbcType=INTEGER}
+			)
+		}
+	</select>	
+	
+	<!-- 관리자 나를 제외한 이메일 중복 체크 -->
+	<select id="XI_SP_FMCS_ADMIN_MEMBER_EXCEPT_ME_EMAIL_CHECK" statementType="CALLABLE" parameterType="hashMap">
+		{ CALL 
+			XI_SP_FMCS_ADMIN_MEMBER_EXCEPT_ME_EMAIL_CHECK(
+				#{@SEQ, 	mode=IN,	jdbcType=INTEGER},
+				#{@EMAIL, 	mode=IN,	jdbcType=VARCHAR},
+				#{@RET_VAL,	mode=OUT,	jdbcType=INTEGER}
+			)
+		}
+	</select>
+	
+	<!-- 관리자 추가 -->
+	<insert id="XI_SP_FMCS_ADMIN_MEMBER_C" statementType="CALLABLE" parameterType="hashMap">
+		{ CALL 
+			XI_SP_FMCS_ADMIN_MEMBER_C(
+				#{@EMAIL, 		mode=IN,	jdbcType=VARCHAR},
+				#{@PWD, 		mode=IN,	jdbcType=VARCHAR},
+				#{@NAME, 		mode=IN,	jdbcType=VARCHAR},
+				#{@GRADE_TYPE, 	mode=IN,	jdbcType=VARCHAR},
+				#{@POSITION, 	mode=IN,	jdbcType=VARCHAR},
+				#{@DEPARTMENT, 	mode=IN,	jdbcType=VARCHAR},
+				#{@COMPANY_YN, 	mode=IN,	jdbcType=VARCHAR},
+				#{@TEL_NO, 		mode=IN,	jdbcType=VARCHAR},
+				#{@MOBILE_NO, 	mode=IN,	jdbcType=INTEGER},
+				#{@COMPANY_SEQ, mode=IN,	jdbcType=INTEGER},
+				#{@REG_SEQ, 	mode=IN,	jdbcType=VARCHAR},
+				#{@NICKNAME, 	mode=IN,	jdbcType=VARCHAR},
+				#{@seq,			mode=OUT,	jdbcType=INTEGER}
+			)
+		}
+	</insert>	
+	
+	<!-- 내 단지 관리자 와 단지 맵핑 등록 -->
+	<insert id="XI_SP_FMCS_ADMIN_APT_MNG_C" statementType="CALLABLE" parameterType="hashMap">
+		{ CALL 
+			XI_SP_FMCS_ADMIN_APT_MNG_C(
+				#{@ADMIN_SEQ,	mode=IN,	jdbcType=INTEGER},
+				#{@APT_SEQ, 	mode=IN,	jdbcType=INTEGER},
+				#{@REG_SEQ, 	mode=IN,	jdbcType=INTEGER}
+			)
+		}
+	</insert>	
+	
+	<!-- 관리자 수정 -->
+	<update id="XI_SP_FMCS_ADMIN_MEMBER_U" statementType="CALLABLE" parameterType="hashMap">
+		{ CALL 
+			XI_SP_FMCS_ADMIN_MEMBER_U(
+				#{@SEQ, 		mode=IN,	jdbcType=INTEGER},
+				#{@EMAIL, 		mode=IN,	jdbcType=VARCHAR},
+				#{@NAME, 		mode=IN,	jdbcType=VARCHAR},
+				#{@POSITION, 	mode=IN,	jdbcType=VARCHAR},
+				#{@DEPARTMENT, 	mode=IN,	jdbcType=VARCHAR},
+				#{@TEL_NO, 		mode=IN,	jdbcType=VARCHAR},
+				#{@MOBILE_NO, 	mode=IN,	jdbcType=VARCHAR},
+				#{@REG_SEQ, 	mode=IN,	jdbcType=INTEGER},
+				#{@NICKNAME, 	mode=IN,	jdbcType=VARCHAR}
+			)
+		}
+	</update>	
+	
+	<!-- 관리자 업체 대표관리자 조회 -->
+	<select id="XI_SP_FMCS_ADMIN_MEMBER_CMP_YN_BY_CMP_SEQ_R" statementType="CALLABLE"
+	 								parameterType="hashMap" resultType="AdminMemberDto">
+		{ CALL 
+			XI_SP_FMCS_ADMIN_MEMBER_CMP_YN_BY_CMP_SEQ_R(
+				#{@COMPANY_SEQ, mode=IN, jdbcType=INTEGER},
+				#{@GRADE_TYPE,	mode=IN, jdbcType=VARCHAR}
+			)
+		}
+	</select>	
+	
+	<!-- 로그인 정보 확인 -->
+	<select id="XI_SP_FMCS_ADMIN_LOGIN_R" statementType="CALLABLE"
+	 								parameterType="hashMap" resultType="AdminMemberDto">
+		{ CALL 
+			XI_SP_FMCS_ADMIN_LOGIN_R(
+				#{@email,		mode=IN, jdbcType=VARCHAR},
+				#{@pwd,			mode=IN, jdbcType=VARCHAR},
+				#{@login_ip,	mode=IN, jdbcType=VARCHAR}
+			)
+		}
+	</select>
+	
+	<!-- 관리자 거래처 관리자 목록 -->
+	<select id="XI_SP_FMCS_ADMIN_COMPANY_MEMBER_L" statementType="CALLABLE"
+	 								parameterType="hashMap" resultType="AdminMemberDetailDto">
+		{ CALL 
+			XI_SP_FMCS_ADMIN_COMPANY_MEMBER_L(
+				#{@SEQ,			mode=IN, jdbcType=INTEGER},
+				#{@PAGE_NUM,	mode=IN, jdbcType=INTEGER},
+				#{@PAGE_SIZE,	mode=IN, jdbcType=INTEGER}
+			)
+		}
+	</select>
+	
+	<!-- 관리자 간단 정보 -->
+	<select id="XI_SP_FMCS_ADMIN_MEMBER_DETAIL_R" statementType="CALLABLE"
+	 								parameterType="hashMap" resultType="AdminMemberDetailMinDto">
+		{ CALL 
+			XI_SP_FMCS_ADMIN_MEMBER_DETAIL_R(
+				#{@SEQ, mode=IN, jdbcType=INTEGER}
+			)
+		}
+	</select>
+	
+	<!-- 내 단지 관리자 와 단지 맵핑 등록 -->
+	<update id="XI_SP_FMCS_ADMIN_MEMBER_MOBILE_NO_U" statementType="CALLABLE" parameterType="hashMap">
+		{ CALL 
+			XI_SP_FMCS_ADMIN_MEMBER_MOBILE_NO_U(
+				#{@SEQ,			mode=IN,	jdbcType=INTEGER},
+				#{@MOBILE_NO, 	mode=IN,	jdbcType=VARCHAR},
+				#{@REG_SEQ, 	mode=IN,	jdbcType=INTEGER}
+			)
+		}
+	</update>
+
+	<!-- 관리자 목록	-->
+	<select id="XI_SP_FMCS_ADMIN_MEMBER_APT_MNG_L" statementType="CALLABLE"
+					parameterType="hashMap" resultType="AdminMemberDetailMinDto">
+		{ CALL
+			XI_SP_FMCS_ADMIN_MEMBER_APT_MNG_L(
+				#{@APT_SEQ, mode=IN, jdbcType=INTEGER}
+			)
+		}
+	</select>
+
+	<insert id="XI_SP_FMCS_ADMIN_MEMBER_APT_MNG_C" statementType="CALLABLE" parameterType="hashMap">
+		{ CALL
+			XI_SP_FMCS_ADMIN_MEMBER_APT_MNG_C(
+				#{@EMAIL,			mode=IN,	jdbcType=VARCHAR},
+				#{@PWD,			mode=IN,	jdbcType=VARCHAR},
+				#{@NAME,			mode=IN,	jdbcType=VARCHAR},
+				#{@GRADE_TYPE,			mode=IN,	jdbcType=VARCHAR},
+				#{@POSITION,			mode=IN,	jdbcType=VARCHAR},
+				#{@DEPARTMENT,			mode=IN,	jdbcType=VARCHAR},
+				#{@COMPANY_YN,			mode=IN,	jdbcType=VARCHAR},
+				#{@TEL_NO,			mode=IN,	jdbcType=VARCHAR},
+				#{@MOBILE_NO, 	mode=IN,	jdbcType=VARCHAR},
+				#{@COMPANY_SEQ, 	mode=IN,	jdbcType=INTEGER},
+				#{@REG_SEQ, 	mode=IN,	jdbcType=INTEGER},
+				#{@NICKNAME, 	mode=IN,	jdbcType=VARCHAR},
+				#{@APT_SEQ, 	mode=IN,	jdbcType=INTEGER},
+				#{@SEQ, 	mode=OUT,	jdbcType=INTEGER}
+			)
+		}
+	</insert>
+
+	<!-- 관리업체 변경 -->
+	<update id="XI_SP_FMCS_ADMIN_MEMBER_COMPANY_YN_U" statementType="CALLABLE" parameterType="hashMap">
+		{ CALL
+			XI_SP_FMCS_ADMIN_MEMBER_COMPANY_YN_U(
+				#{@SEQ,			mode=IN,	jdbcType=INTEGER},
+				#{@OLD_SEQ, 	mode=IN,	jdbcType=INTEGER},
+				#{@REG_SEQ, 	mode=IN,	jdbcType=INTEGER}
+			)
+		}
+	</update>
+
+	<!-- 대표관리자 체크	-->
+	<select id="XI_SP_FMCS_ADMIN_MEMBER_COMPANY_YN_CHECK" statementType="CALLABLE" parameterType="hashMap">
+		{ CALL
+			XI_SP_FMCS_ADMIN_MEMBER_COMPANY_YN_CHECK(
+				#{@SEQ, mode=IN, jdbcType=INTEGER},
+				#{@RET_VAL, mode=OUT, jdbcType=INTEGER}
+			)
+		}
+	</select>
+
+	<!-- 관리자 삭제 -->
+	<delete id="XI_SP_FMCS_ADMIN_MEMBER_D" statementType="CALLABLE" parameterType="hashMap">
+		{ CALL
+			XI_SP_FMCS_ADMIN_MEMBER_D(
+				#{@SEQ,			mode=IN,	jdbcType=INTEGER}
+			)
+		}
+	</delete>
+</mapper>

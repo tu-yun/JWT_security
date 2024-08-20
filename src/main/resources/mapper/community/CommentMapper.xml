@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xi.fmcs.domain.community.repository.CommentRepository">
+
+  <!-- 댓글 수정 -->
+  <update id="XI_SP_FMCS_ADMIN_COMMENT_U" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_COMMENT_U(
+        #{@SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@CONTENTS,	mode=IN,	jdbcType=VARCHAR},
+        #{@WRITER_NICKNM, 	mode=IN,	jdbcType=VARCHAR},
+        #{@WRITER_NM, 		mode=IN,	jdbcType=VARCHAR},
+        #{@ADMIN_SEQ, 		mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </update>
+
+  <!-- 댓글 저장 -->
+  <insert id="XI_SP_FMCS_ADMIN_COMMENT_C" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_COMMENT_C(
+        #{@GROUP_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@BOARD_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@CONTENTS,	mode=IN,	jdbcType=VARCHAR},
+        #{@WRITER_NICKNM, 	mode=IN,	jdbcType=VARCHAR},
+        #{@WRITER_NM, 		mode=IN,	jdbcType=VARCHAR},
+        #{@LEVEL_R, 		mode=IN,	jdbcType=INTEGER},
+        #{@PARENT_SEQ, 		mode=IN,	jdbcType=INTEGER},
+        #{@ADMIN_SEQ, 		mode=IN,	jdbcType=INTEGER},
+        #{@IDX, 		mode=OUT,	jdbcType=INTEGER}
+      )
+    }
+  </insert>
+
+  <!-- 댓글 목록 -->
+  <select id="XI_SP_FMCS_ADMIN_COMMENT_L" statementType="CALLABLE"
+          parameterType="hashMap" resultType="CommentDto">
+    { CALL
+      XI_SP_FMCS_ADMIN_COMMENT_L(
+        #{@GROUP_SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@BOARD_SEQ, 		mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </select>
+
+  <!-- 커뮤니티 설정 게시판 삭제 -->
+  <delete id="XI_SP_FMCS_ADMIN_COMMENT_D" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_COMMENT_D(
+        #{@SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@ADMIN_SEQ, 		mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </delete>
+
+  <!-- 댓글 숨김여부 변경 -->
+  <update id="XI_SP_FMCS_ADMIN_COMMENT_HID_U" statementType="CALLABLE" parameterType="hashMap">
+    { CALL
+      XI_SP_FMCS_ADMIN_COMMENT_HID_U(
+        #{@SEQ, 	mode=IN,	jdbcType=INTEGER},
+        #{@ADMIN_HID_YN,	mode=IN,	jdbcType=VARCHAR},
+        #{@ADIMN_SEQ, 		mode=IN,	jdbcType=INTEGER}
+      )
+    }
+  </update>
+
+</mapper>
